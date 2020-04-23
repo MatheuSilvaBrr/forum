@@ -1,0 +1,29 @@
+1) Encapsulamento: É a forma de ocultar detalhes de implementação de um objeto. Os atributos geralmente são private
+e para ter acesso ao valor teremos que ter um método de acesso.
+Tudo o que o usuário externo precisa conhecer é os atributo ou métodos public, isso é bom por deixar mais flexivel, 
+facil de modificar e criar novas implmentações;
+
+private String nomePagador;
+
+public String getNomePagador() {
+	return nomePagador; 
+}
+
+public void setNomePagador(String nomePagador) {	
+	this.nomePagador = nomePagador;
+}
+
+2) com os métodos setters, você pode deixar a validação em apenas em um lugar, para que sempre que quiser adicionar um valor 
+no atributo ele irá passar no método setter e validar, assim conseguimos fazer um bom reuso de nosso código, fica mais facil 
+de fazer a manutenção também por se temos que mudar o código em apena um lugar por exemplo
+	
+	public Boleto(String nomePagador) {
+		setNomePagador(nomePagador);
+	}
+
+	public void setNomePagador(String nomePagador) {
+		if(Objects.isNull(nomePagador)  || nomePagador.isEmpty()) {
+			throw new IllegalArgumentException("Não é permitido nome vazio ou nulo");
+		}
+		this.nomePagador = nomePagador;
+	}
